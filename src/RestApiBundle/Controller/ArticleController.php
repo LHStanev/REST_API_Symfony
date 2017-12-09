@@ -71,8 +71,10 @@ class ArticleController extends Controller
     }
 
     protected function createArticle(Request $request) {
-        $article = new Article();
-        $parameters = $request->request->all();
+        $parameters = $request->getContent();
+
+        $serializer = $this->container->get('jms_serializer');
+        $article = $serializer->deserialize($parameters, Article::class, 'json');
 
         $persistedType = $this->processForm($article, $parameters, 'POST');
         return $persistedType;
@@ -81,7 +83,8 @@ class ArticleController extends Controller
     private function processForm($article, $params, $method = 'POST') {
        $form = $this->createForm(ArticleType::class, $article, ['method'
         => $method]);
-        $form->submit($params);
+       $form->submit($params);
+
         if ($form->isSubmitted()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
