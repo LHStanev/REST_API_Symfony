@@ -31,16 +31,30 @@ class Article
     /**
      * @var string
      *
-     * @ORM\Column(name="body", type="text")
+     * @ORM\Column(name="content", type="text")
      */
-    private $body;
+    private $content;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateCreated", type="datetime")
+     * @ORM\Column(name="date", type="date")
      */
-    private $dateCreated;
+    private $date;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="post_image", type="string", length=255)
+     */
+    private $postImage;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="cat_id", type="integer")
+     */
+    private $catId;
 
 
     /**
@@ -78,51 +92,99 @@ class Article
     }
 
     /**
-     * Set body
+     * Set content
      *
-     * @param string $body
+     * @param string $content
      *
      * @return Article
      */
-    public function setBody($body)
+    public function setContent($content)
     {
-        $this->body = $body;
+        $this->content = $content;
 
         return $this;
     }
 
     /**
-     * Get body
+     * Get content
      *
      * @return string
      */
-    public function getBody()
+    public function getContent()
     {
-        return $this->body;
+        return $this->content;
     }
 
     /**
-     * Set dateCreated
+     * Set date
      *
-     * @param \DateTime $dateCreated
+     * @param \DateTime $date
      *
      * @return Article
      */
-    public function setDateCreated($dateCreated)
+    public function setDate($date)
     {
-        $this->dateCreated = $dateCreated;
+        $this->date = $date;
 
         return $this;
     }
 
     /**
-     * Get dateCreated
+     * Get date
      *
      * @return \DateTime
      */
-    public function getDateCreated()
+    public function getDate()
     {
-        return $this->dateCreated;
+        return $this->date;
+    }
+
+    /**
+     * Set postImage
+     *
+     * @param string $postImage
+     *
+     * @return Article
+     */
+    public function setPostImage($postImage)
+    {
+        $this->postImage = $postImage;
+
+        return $this;
+    }
+
+    /**
+     * Get postImage
+     *
+     * @return string
+     */
+    public function getPostImage()
+    {
+        return $this->postImage;
+    }
+
+    /**
+     * Set catId
+     *
+     * @param integer $catId
+     *
+     * @return Article
+     */
+    public function setCatId($catId)
+    {
+        $this->catId = $catId;
+
+        return $this;
+    }
+
+    /**
+     * Get catId
+     *
+     * @return int
+     */
+    public function getCatId()
+    {
+        return $this->catId;
     }
 }
 
