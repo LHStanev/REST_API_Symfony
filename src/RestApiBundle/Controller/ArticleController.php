@@ -76,21 +76,9 @@ class ArticleController extends Controller
         $serializer = $this->container->get('jms_serializer');
         $article = $serializer->deserialize($parameters, Article::class, 'json');
 
-        $persistedType = $this->processForm($article, $parameters, 'POST');
-        return $persistedType;
-    }
-
-    private function processForm($article, $params, $method = 'POST') {
-       $form = $this->createForm(ArticleType::class, $article, ['method'
-        => $method]);
-       $form->submit($params);
-
-        if ($form->isSubmitted()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($article);
-            $em->flush();
-            return $article;
-        }
-        throw new \Exception('submitted data is invalid');
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($article);
+        $em->flush();
+        return $article;
     }
 }
